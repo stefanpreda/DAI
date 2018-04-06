@@ -1,0 +1,41 @@
+{{#paper-nav-container open=drawerOpen classNames="ember-app"}}
+  {{#paper-sidenav classNames="md-sidenav-left md-whiteframe-z2" flex-layout="column" flex=true }}
+    {{#paper-toolbar}}
+      <div class="md-toolbar-tools">
+        <img src="ember-logo.png" height="50">&nbsp;&nbsp;<strong>Health site</strong>
+      </div>
+    {{/paper-toolbar}}
+    {{#paper-content}}
+      {{#paper-list}}
+        <div class={{isSignInActive}}>
+          {{#paper-item action="transitionTo" param="sign-in"}}
+            {{paper-icon icon="mail" size="lg"}}
+              Sign In
+          {{/paper-item}}
+        </div>
+        <div class={{isSignUpActive}}>
+          {{#paper-item action="transitionTo" param="sign-up"}}
+            {{paper-icon icon="mail" size="lg"}}
+              Sign Up
+          {{/paper-item}}
+        </div>
+        <div class={{isAppointmentsActive}}>
+          {{#paper-item action="transitionTo" param="appointments"}}
+            {{paper-icon icon="home" size="lg"}}
+              Appointments
+          {{/paper-item}}
+        </div>
+        <div class={{isResultsActive}}>
+          {{#paper-item action="transitionTo" param="results"}}
+            {{paper-icon icon="photo" size="lg"}}
+              Results
+          {{/paper-item}}
+        </div>
+     {{/paper-list}}
+    {{/paper-content}}
+  {{/paper-sidenav}}
+
+  {{#paper-content flex-layout="column" flex=true}}
+    {{outlet}}
+  {{/paper-content}}
+{{/paper-nav-container}}

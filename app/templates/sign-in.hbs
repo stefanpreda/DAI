@@ -1,0 +1,19 @@
+{{#paper-toolbar}}
+<div class="md-toolbar-tools">
+  <h2 flex=true>
+    {{#paper-sidenav-toggle class="menu-sidenav-toggle"}}
+      {{paper-icon icon="menu"}}
+    {{/paper-sidenav-toggle}}
+    Sign In 
+  </h2>
+</div>
+{{/paper-toolbar}}
+
+{{#paper-content}}
+  <div class="container">
+    {{paper-input label="Username" name="Username" id="Username" type="text" value=username onChange=(action (mut username))}}
+    {{paper-input label="Password" name="Password" id="Password" type="password" value=InputPassword onChange=(action (mut InputPassword))}}
+
+    {{#paper-button raised=true classNames="md-primary" action="submit" username=this.$.Username.value}}Sign-In{{/paper-button}}    
+  </div>
+{{/paper-content}}
