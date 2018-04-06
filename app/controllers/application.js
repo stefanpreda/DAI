@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   needs: 'application',
+
+  authSuccessful: false,
   
   isAppointmentsActive: function() {
     if (this.get('controllers.application.currentPath') === 'appointments'){

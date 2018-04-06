@@ -11,8 +11,8 @@
 
 {{#paper-content}}
   <div class="container">
-    {{paper-input label="Username" name="Username" id="Username" type="text" value=username onChange=(action (mut username))}}
-    {{paper-input label="Password" name="Password" id="Password" type="password" value=InputPassword onChange=(action (mut InputPassword))}}
+    {{paper-input label="Username" name="Username" id="Username" type="text" value=username}}
+    {{paper-input label="Password" name="Password" id="Password" type="password" value=password}}
 
     {{#paper-button raised=true classNames="md-primary" action="submit" username=this.$.Username.value}}Sign-In{{/paper-button}}    
   </div>

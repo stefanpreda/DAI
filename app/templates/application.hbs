@@ -7,30 +7,33 @@
     {{/paper-toolbar}}
     {{#paper-content}}
       {{#paper-list}}
-        <div class={{isSignInActive}}>
-          {{#paper-item action="transitionTo" param="sign-in"}}
-            {{paper-icon icon="mail" size="lg"}}
-              Sign In
-          {{/paper-item}}
-        </div>
-        <div class={{isSignUpActive}}>
-          {{#paper-item action="transitionTo" param="sign-up"}}
-            {{paper-icon icon="mail" size="lg"}}
-              Sign Up
-          {{/paper-item}}
-        </div>
-        <div class={{isAppointmentsActive}}>
-          {{#paper-item action="transitionTo" param="appointments"}}
-            {{paper-icon icon="home" size="lg"}}
-              Appointments
-          {{/paper-item}}
-        </div>
-        <div class={{isResultsActive}}>
-          {{#paper-item action="transitionTo" param="results"}}
-            {{paper-icon icon="photo" size="lg"}}
-              Results
-          {{/paper-item}}
-        </div>
+        {{#if authSuccessful}}
+          <div class={{isAppointmentsActive}}>
+            {{#paper-item action="transitionTo" param="appointments"}}
+              {{paper-icon icon="home" size="lg"}}
+                Appointments
+            {{/paper-item}}
+          </div>
+          <div class={{isResultsActive}}>
+            {{#paper-item action="transitionTo" param="results"}}
+              {{paper-icon icon="photo" size="lg"}}
+                Results
+            {{/paper-item}}
+          </div>
+        {{else}}
+          <div class={{isSignInActive}}>
+            {{#paper-item action="transitionTo" param="sign-in"}}
+              {{paper-icon icon="mail" size="lg"}}
+                Sign In
+            {{/paper-item}}
+          </div>
+          <div class={{isSignUpActive}}>
+            {{#paper-item action="transitionTo" param="sign-up"}}
+              {{paper-icon icon="mail" size="lg"}}
+                Sign Up
+            {{/paper-item}}
+          </div>
+        {{/if}}
      {{/paper-list}}
     {{/paper-content}}
   {{/paper-sidenav}}
