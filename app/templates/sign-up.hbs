@@ -11,27 +11,21 @@
 
 {{#paper-content}}
   <div class="container">
+    {{paper-input label="Name" value=name}}
     {{paper-input label="Username" value=username}}
-    {{paper-input label="E-mail" type="email" value=email}}
     {{paper-input label="Password" type="password" value=password}}
-    {{paper-input textarea=true label="Address" value=address}}
+    {{paper-input label="Re-Password" type="password" value=rePassword}}
 
-    <p><strong>Select your avatar:</strong></p>
-    {{#paper-radio value="ember-logo" selected=selectedValue}}
-      <img src="ember-logo.png" height="100">
-    {{/paper-radio}}
-  
-    {{#paper-radio value="ember-logo-2" selected=selectedValue}}
-      <img src="ember-logo-2.png" height="100">
-    {{/paper-radio}}
+    <p><strong>Select your role:</strong></p>
+    <select onchange={{action 'setRole' value='target.value'}}>
+      {{#each roles as |role|}}
+          <option value={{role}}>{{role}}</option>
+      {{/each}}
+    </select>
+    
+    <br><br><br><br>
 
-    {{#paper-radio value="ember-logo-3" selected=selectedValue}}
-      <img src="ember-logo-3.png" height="100">
-    {{/paper-radio}}
-
-    {{#paper-checkbox checked=value1}}Receive newsletters{{/paper-checkbox}}    
-
-    {{#paper-button raised=true classNames="md-primary" action="submit" param=true}}Sign-Up{{/paper-button}}    
+    {{#paper-button raised=true classNames="md-primary" action="submit"}}Sign-Up{{/paper-button}}    
 
   </div>
 {{/paper-content}}

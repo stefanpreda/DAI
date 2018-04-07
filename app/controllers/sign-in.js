@@ -30,6 +30,8 @@ export default Ember.Controller.extend({
               this.set('controllers.application.currentRole', element.role);
 
               found = true;
+              this.set('username', null);
+              this.set('password', null);
               this.transitionToRoute('appointments');
           }
       });

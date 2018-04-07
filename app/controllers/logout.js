@@ -1,14 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ['application', 'sign-in'],
+  needs: 'application',
 
   actions:{
     logout: function() {
 
         //#TODO POST TO BACKEND
-        this.set('controllers.sign-in.username', null);
-        this.set('controllers.sign-in.password', null);
         
         this.set('controllers.application.authSuccessful', false);
         this.set('controllers.application.currentUsername', null);
