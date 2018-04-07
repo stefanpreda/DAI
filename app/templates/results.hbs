@@ -11,18 +11,32 @@
 
 {{#paper-content}}
   <div class="container">
-    {{#each this as |item|}}
-      <div class="container">
-      {{#paper-card}}
-          {{#paper-card-content}}
-            <h2>{{item.header}}</h2>
-            <p>
-              {{item.message}}
-            </p>
-          {{/paper-card-content}}
-      {{/paper-card}}
-      </div>
-    {{/each}}
+    {{#if displayForm}}
+        <h1>Save patient results</h1>
+        <p><strong>Select patient:</strong></p>
+        <select onchange={{action 'setPatient' value='target.value'}}>
+          {{#each patients as |patient|}}
+              <option value={{patient}}>{{patient}}</option>
+          {{/each}}
+        </select>
+        <br><br><br><br>
+        {{paper-input label="Title" name="Title" id="Title" type="text" value=title}}
+        {{paper-input label="Description" name="Description" id="Description" type="text" textarea=true maxlength=150 rows=5 maxRows=5 value=description}}
+        {{#paper-button raised=true classNames="md-primary" action="submit"}}Save{{/paper-button}}    
+    {{else}}
+      {{#each resultEntries as |item|}}
+        <div class="container">
+        {{#paper-card}}
+            {{#paper-card-content}}
+              <h2>{{item.header}}</h2>
+              <p>
+                {{item.message}}
+              </p>
+            {{/paper-card-content}}
+        {{/paper-card}}
+        </div>
+      {{/each}}
+    {{/if}}  
   </div>
 {{/paper-content}}
 
