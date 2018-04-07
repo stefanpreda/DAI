@@ -4,6 +4,8 @@ export default Ember.Controller.extend({
   needs: 'application',
 
   authSuccessful: false,
+  currentUsername: null,
+  currentRole: null,
   
   isAppointmentsActive: function() {
     if (this.get('controllers.application.currentPath') === 'appointments'){
@@ -28,4 +30,10 @@ export default Ember.Controller.extend({
       return 'active';
     }
   }.property('controllers.application.currentPath'),
+
+  isLogoutActive: function() {
+    if (this.get('controllers.application.currentPath') === 'logout'){
+      return 'active';
+    }
+  }.property('controllers.application.currentPath')
 });

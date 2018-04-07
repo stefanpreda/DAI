@@ -1,0 +1,17 @@
+{{#paper-toolbar}}
+<div class="md-toolbar-tools">
+  <h2 flex=true>
+    {{#paper-sidenav-toggle class="menu-sidenav-toggle"}}
+      {{paper-icon icon="menu"}}
+    {{/paper-sidenav-toggle}}
+    Sign In 
+  </h2>
+</div>
+{{/paper-toolbar}}
+
+{{#paper-content}}
+  <div class="container">
+    <p><strong>Do you want to log out?</strong></p>
+    {{#paper-button raised=true classNames="md-primary" action="logout"}}Log out{{/paper-button}}    
+  </div>
+{{/paper-content}}

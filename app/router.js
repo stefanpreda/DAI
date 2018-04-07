@@ -11,4 +11,5 @@ export default Router.map(function() {
   this.route('results');
   this.route('sign-up');
   this.route('sign-in');
+  this.route('logout');
 });

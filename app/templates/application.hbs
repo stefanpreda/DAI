@@ -20,6 +20,12 @@
                 Results
             {{/paper-item}}
           </div>
+          <div class={{isLogoutActive}}>
+            {{#paper-item action="transitionTo" param="logout"}}
+              {{paper-icon icon="mail" size="lg"}}
+                Log out
+            {{/paper-item}}
+          </div>
         {{else}}
           <div class={{isSignInActive}}>
             {{#paper-item action="transitionTo" param="sign-in"}}
