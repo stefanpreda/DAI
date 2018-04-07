@@ -11,7 +11,7 @@
 
 {{#paper-content}}
   <div class="container">
-    {{#each this as |item|}}
+    {{#each specializationsOrAppointments as |item|}}
       <div class="home-card">
       {{#paper-card}}
         {{#paper-toolbar}}
@@ -19,9 +19,11 @@
             <h2 flex=true>
               {{item.title}}
             </h2>
-            {{#paper-button classNames="md-icon-button" action="addButton"}}
-              {{paper-icon icon="add"}}
-            {{/paper-button}}
+            {{#if addButtonNeeded}}
+              {{#paper-button classNames="md-icon-button" action="addButton"}}
+                {{paper-icon icon="add"}}
+              {{/paper-button}}
+            {{/if}}
           </div>
         {{/paper-toolbar}}
         {{#paper-card-content}}

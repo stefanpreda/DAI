@@ -11,10 +11,10 @@
 
 {{#paper-content}}
   <div class="container">
-    {{paper-input label="Name" value=name}}
-    {{paper-input label="Username" value=username}}
-    {{paper-input label="Password" type="password" value=password}}
-    {{paper-input label="Re-Password" type="password" value=rePassword}}
+    {{paper-input label="Name" required=true value=name}}
+    {{paper-input label="Username" required=true value=username}}
+    {{paper-input label="Password" required=true type="password" value=password}}
+    {{paper-input label="Re-Password" required=true type="password" value=rePassword}}
 
     <p><strong>Select your role:</strong></p>
     <select onchange={{action 'setRole' value='target.value'}}>

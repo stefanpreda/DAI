@@ -2,9 +2,12 @@ import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
 
+  addButtonNeeded: false,
+  specializationsOrAppointments: [],
+
   actions:{
     addButton: function(){
-      alert("Add button clicked~");
+      this.transitionToRoute('new-appointment');
     } 
   }
 });

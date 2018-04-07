@@ -1,0 +1,32 @@
+{{#paper-toolbar}}
+<div class="md-toolbar-tools">
+  <h2 flex=true>
+    {{#paper-sidenav-toggle class="menu-sidenav-toggle"}}
+      {{paper-icon icon="menu"}}
+    {{/paper-sidenav-toggle}}
+    New appointment 
+  </h2>
+</div>
+{{/paper-toolbar}}
+
+{{#paper-content}}
+  <div class="container">
+    {{paper-input label="Name" required=true value=name}}
+    {{paper-input label="Title" name="Title" id="Title" type="text" required=true value=title}}
+    {{paper-input label="Description" name="Description" id="Description" type="text" required=true textarea=true maxlength=150 rows=5 maxRows=5 value=description}}
+    {{paper-input class="flex" label="Appointment date" type="date" required=true value=date}}
+    {{input id="time" type="time" value=time}}
+
+    <p><strong>Select doctor:</strong></p>
+    <select onchange={{action 'setDoctor' value='target.value'}}>
+      {{#each doctors as |doctor|}}
+          <option value={{doctor}}>{{doctor}}</option>
+      {{/each}}
+    </select>
+    
+    <br><br><br><br>
+
+    {{#paper-button raised=true classNames="md-primary" action="submit"}}Submit{{/paper-button}}    
+
+  </div>
+{{/paper-content}}

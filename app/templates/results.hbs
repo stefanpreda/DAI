@@ -20,8 +20,8 @@
           {{/each}}
         </select>
         <br><br><br><br>
-        {{paper-input label="Title" name="Title" id="Title" type="text" value=title}}
-        {{paper-input label="Description" name="Description" id="Description" type="text" textarea=true maxlength=150 rows=5 maxRows=5 value=description}}
+        {{paper-input label="Title" name="Title" id="Title" type="text" required=true value=title}}
+        {{paper-input label="Description" name="Description" id="Description" type="text" required=true textarea=true maxlength=150 rows=5 maxRows=5 value=description}}
         {{#paper-button raised=true classNames="md-primary" action="submit"}}Save{{/paper-button}}    
     {{else}}
       {{#each resultEntries as |item|}}
