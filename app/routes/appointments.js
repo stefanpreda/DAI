@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-
+  ajax: Ember.inject.service(),
   staticSpecializations: [{
       title: 'Cardiology',
       content: 'The branch of medicine dealing with disorders of the heart as well as parts of the circulatory system.'
@@ -39,21 +39,6 @@ export default Ember.Route.extend({
       content: 'The science that uses medical imaging to diagnose and sometimes also treat diseases within the body.'
     }],
   
-  staticAppointments: [
-    {
-      title: 'Appointment1',
-      content: 'Some information about appointment'
-    },
-    {
-      title: 'Appointment2',
-      content: 'Some information about appointment'
-    },
-    {
-      title: 'Appointment3',
-      content: 'Some information about appointment'
-    }
-  ],
-  
   beforeModel() {
     this.controllerFor("appointments").set("specializationsOrAppointments", []);
     this.controllerFor("appointments").set("addButtonNeeded", false);
@@ -64,9 +49,32 @@ export default Ember.Route.extend({
     }
 
     if (this.controllerFor("application").get("currentRole") === "doctor") {
-        //#TODO GET APPOINTMENTS FROM BACKEND
-        this.controllerFor("appointments").set("specializationsOrAppointments", this.get('staticAppointments'));
-      }
+      let options = {
+        method: 'GET',
+        dataType: 'json',
+        headers: {
+          'Content-Type':'application/json'
+        }
+      };
+  
+      let url = 'http://localhost:8080/appointments/fetch?name=' + this.controllerFor("application").get('currentName');
+      var self = this;
+  
+      this.get('ajax').request(url, options).then(function(result){
+          var appointments = [];
+          result.appointments.forEach(element => {
+              var appointmentsEntry = {};
+              appointmentsEntry.title = element.title;
+              appointmentsEntry.content = element.description;
+              
+              appointments.push(appointmentsEntry);
+          });
+          self.controllerFor("appointments").set("specializationsOrAppointments", appointments);
+      },
+      function(reason) {
+          alert("Fetching appointments failed: " + reason.errors[0].detail.message);
+      });
+    }
     else {
         this.controllerFor("appointments").set("addButtonNeeded", true);
         this.controllerFor("appointments").set("specializationsOrAppointments", this.get('staticSpecializations'));
