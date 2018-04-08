@@ -6,10 +6,10 @@ export default Ember.Route.extend({
     if (this.controllerFor("application").get("authSuccessful")) {
         this.transitionTo('appointments');
     }
-    var authSuccessful = (localStorage.authSuccessful === 'true');
-    var currentUsername = localStorage.currentUsername;
-    var currentName = localStorage.currentName;
-    var currentRole = localStorage.currentRole;
+    var authSuccessful = (sessionStorage.authSuccessful === 'true');
+    var currentUsername = sessionStorage.currentUsername;
+    var currentName = sessionStorage.currentName;
+    var currentRole = sessionStorage.currentRole;
 
     if (authSuccessful) {
       this.controllerFor("application").set("authSuccessful", authSuccessful);
