@@ -7,9 +7,16 @@ export default Ember.Controller.extend({
   currentUsername: null,
   currentName: null,
   currentRole: null,
+  isPatient: true,
   
   isAppointmentsActive: function() {
     if (this.get('controllers.application.currentPath') === 'appointments'){
+      return 'active';
+    }
+  }.property('controllers.application.currentPath'),
+
+  isMyAppointmentsActive: function() {
+    if (this.get('controllers.application.currentPath') === 'my-appointments'){
       return 'active';
     }
   }.property('controllers.application.currentPath'),
@@ -36,5 +43,5 @@ export default Ember.Controller.extend({
     if (this.get('controllers.application.currentPath') === 'logout'){
       return 'active';
     }
-  }.property('controllers.application.currentPath')
+  }.property('controllers.application.currentPath'),
 });

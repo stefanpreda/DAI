@@ -7,6 +7,7 @@ export default Ember.Route.extend({
         this.transitionTo('appointments');
     }
     var authSuccessful = (sessionStorage.authSuccessful === 'true');
+    var isPatient = (sessionStorage.isPatient === 'true');
     var currentUsername = sessionStorage.currentUsername;
     var currentName = sessionStorage.currentName;
     var currentRole = sessionStorage.currentRole;
@@ -16,6 +17,7 @@ export default Ember.Route.extend({
       this.controllerFor("application").set("currentUsername", currentUsername);
       this.controllerFor("application").set("currentName", currentName);
       this.controllerFor("application").set("currentRole", currentRole);
+      this.controllerFor("application").set("isPatient", isPatient);
       this.transitionTo('appointments');
     }
   },

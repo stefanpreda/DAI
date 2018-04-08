@@ -14,6 +14,14 @@
                 Appointments
             {{/paper-item}}
           </div>
+          {{#if isPatient}}
+            <div class={{isMyAppointmentsActive}}>
+              {{#paper-item action="transitionTo" param="my-appointments"}}
+                {{paper-icon icon="home" size="lg"}}
+                  My Appointments
+              {{/paper-item}}
+            </div>
+          {{/if}}
           <div class={{isResultsActive}}>
             {{#paper-item action="transitionTo" param="results"}}
               {{paper-icon icon="photo" size="lg"}}
@@ -22,14 +30,14 @@
           </div>
           <div class={{isLogoutActive}}>
             {{#paper-item action="transitionTo" param="logout"}}
-              {{paper-icon icon="mail" size="lg"}}
+              {{paper-icon icon="lock" size="lg"}}
                 Log out
             {{/paper-item}}
           </div>
         {{else}}
           <div class={{isSignInActive}}>
             {{#paper-item action="transitionTo" param="sign-in"}}
-              {{paper-icon icon="mail" size="lg"}}
+              {{paper-icon icon="lock-open" size="lg"}}
                 Sign In
             {{/paper-item}}
           </div>

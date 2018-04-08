@@ -1,0 +1,33 @@
+{{#paper-toolbar}}
+<div class="md-toolbar-tools">
+  <h2>
+    {{#paper-sidenav-toggle class="menu-sidenav-toggle"}}
+      {{paper-icon icon="menu"}}
+    {{/paper-sidenav-toggle}}
+    Appointments
+  </h2>
+</div>
+{{/paper-toolbar}}
+
+{{#paper-content}}
+  <div class="container">
+    {{#each appointments as |item|}}
+      <div class="home-card">
+      {{#paper-card}}
+        {{#paper-toolbar}}
+          <div class="md-toolbar-tools">
+            <h2 flex=true>
+              {{item.title}}
+            </h2>
+          </div>
+        {{/paper-toolbar}}
+        {{#paper-card-content}}
+          <p>
+            {{item.content}}
+          </p>
+        {{/paper-card-content}}
+      {{/paper-card}}
+      </div>
+    {{/each}}
+  </div>
+{{/paper-content}}

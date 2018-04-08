@@ -38,8 +38,18 @@ export default Ember.Controller.extend({
         self.set('controllers.application.currentUsername', result.user.userName);
         self.set('controllers.application.currentName', result.user.name);
         self.set('controllers.application.currentRole', result.user.role);
+        if (result.user.role === 'patient') {
+          self.set('controllers.application.isPatient', true);
+          sessionStorage.setItem('isPatient', true);
+        }
+        else
+        {
+          self.set('controllers.application.isPatient', false);
+          sessionStorage.setItem('isPatient', false);
+        }
         sessionStorage.setItem('authSuccessful', true);
         sessionStorage.setItem('currentUsername', result.user.userName);
+        sessionStorage.setItem('currentName', result.user.name);
         sessionStorage.setItem('currentRole', result.user.role);
 
         self.transitionToRoute('appointments');
