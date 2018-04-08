@@ -2,17 +2,17 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   needs: 'application',
+  ajax: Ember.inject.service(),
 
-  credentials: [{
-    username: "patient",
-    password: "patient",
-    role: "patient"
+  options: {
+    url: 'http://localhost:8080/users/validate',
+    method: 'POST',
+    dataType: 'json',
+    headers: {
+      'Content-Type':'application/json'
+    },
+    data: ''
   },
-  {
-    username: "doctor",
-    password: "doctor",
-    role: "doctor"
-  }],
   
   username: null,
   password: null,
@@ -20,25 +20,29 @@ export default Ember.Controller.extend({
   actions:{
     submit: function() {
 
-      let found = false;
+      const url = this.get('options').url;
+      delete this.get('options').url; 
 
-    //#TODO POST TO BACKEND INSTEAD
-      this.get('credentials').forEach(element => {
-          if (this.get('username') === element.username && this.get('password') === element.password) {
-              this.set('controllers.application.authSuccessful', true);
-              this.set('controllers.application.currentUsername', element.username);
-              this.set('controllers.application.currentRole', element.role);
-
-              found = true;
-              this.set('username', null);
-              this.set('password', null);
-              this.transitionToRoute('appointments');
-          }
+      let options = this.get('options');
+      options.data = JSON.stringify({
+        userName: this.get('username'),
+        password: this.get('password'),
       });
 
-      if (!found) {
+      this.set('username', null);
+      this.set('password', null);
+
+      var self = this;
+      this.get('ajax').request(url, options).then(function(result){
+        self.set('controllers.application.authSuccessful', true);
+        self.set('controllers.application.currentUsername', result.user.userName);
+        self.set('controllers.application.currentRole', result.user.role);
+
+        self.transitionToRoute('appointments');
+      },
+      function(){
         alert("Invalid username and/or password");
-      }
+      });
     } 
   }
 });

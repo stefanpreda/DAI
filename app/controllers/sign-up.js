@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   needs: 'sign-in',
+  ajax: Ember.inject.service(),
 
   name: null,
   username: null,
@@ -9,6 +10,16 @@ export default Ember.Controller.extend({
   rePassword: null,
   roles: ["patient", "doctor"],
   selectedRole: "patient",
+
+  options: {
+    url: 'http://localhost:8080/users/register',
+    method: 'POST',
+    dataType: 'json',
+    headers: {
+      'Content-Type':'application/json'
+    },
+    data: ''
+  },
 
   actions:{
     submit: function(){
@@ -22,8 +33,17 @@ export default Ember.Controller.extend({
         alert("Passwords do not match!");
         return;
       }
+      
+      const url = this.get('options').url;
+      delete this.get('options').url; 
 
-      //#TODO POST TO BACKEND
+      let options = this.get('options');
+      options.data = JSON.stringify({
+        userName: this.get('username'),
+        password: this.get('password'),
+        role: this.get('selectedRole'),
+        name: this.get('name')
+      });
 
       this.set('name', null);
       this.set('selectedRole', "patient");
@@ -31,8 +51,14 @@ export default Ember.Controller.extend({
       this.set('password', null);
       this.set('rePassword', null);
 
-      this.transitionToRoute('sign-in');
-      alert("Sign-up successful");
+      var self = this;
+      this.get('ajax').request(url, options).then(function(){
+        alert("Sign-up successful");
+        self.transitionToRoute('sign-in');
+      },
+      function(reason){
+        alert("Sign-up failed: " + reason.errors[0].detail.message);
+      });
     },
 
     setRole: function(role) {
