@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
 
   authSuccessful: false,
   currentUsername: null,
+  currentName: null,
   currentRole: null,
   
   isAppointmentsActive: function() {

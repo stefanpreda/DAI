@@ -1,23 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  ajax: Ember.inject.service(),
 
-  staticResults: [
-    {
-        header: "First result header",
-        message: "first result message"
-    },
-    {
-        header: "Second result header",
-        message: "second result message"
-    },
-    {
-        header: "Third result header",
-        message: "third result message"
-    }
-  ],
   staticPatients: [
-    "PATIENT1", "PATIENT2", "PATIENT3"
+    "asd", "PATIENT2", "PATIENT3"
   ],
 
   beforeModel() {
@@ -35,9 +22,33 @@ export default Ember.Route.extend({
         this.controllerFor("results").set("patients", this.get('staticPatients'));
         this.controllerFor("results").set("selectedPatient", this.get('staticPatients')[0]);
     }
-    else {
-        //#TODO GET THEM FROM BACKEND
-        this.controllerFor("results").set("resultEntries", this.get('staticResults'));
+    else {        
+        let options = {
+            method: 'GET',
+            dataType: 'json',
+            headers: {
+              'Content-Type':'application/json'
+            }
+        };
+
+        const url = 'http://localhost:8080/results/fetch?name=' + this.controllerFor("application").get('currentName');
+
+        var self = this;
+
+        this.get('ajax').request(url, options).then(function(result){
+            var results = [];
+            result.results.forEach(element => {
+                var resultEntry = {};
+                resultEntry.header = element.title;
+                resultEntry.message = element.description;
+                
+                results.push(resultEntry);
+            });
+            self.controllerFor("results").set("resultEntries", results);
+        },
+        function(reason) {
+            alert("Fetching results failed: " + reason.errors[0].detail.message);
+        });
     }
   }
 });

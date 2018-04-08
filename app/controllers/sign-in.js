@@ -36,6 +36,7 @@ export default Ember.Controller.extend({
       this.get('ajax').request(url, options).then(function(result){
         self.set('controllers.application.authSuccessful', true);
         self.set('controllers.application.currentUsername', result.user.userName);
+        self.set('controllers.application.currentName', result.user.name);
         self.set('controllers.application.currentRole', result.user.role);
 
         self.transitionToRoute('appointments');
