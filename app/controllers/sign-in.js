@@ -38,6 +38,9 @@ export default Ember.Controller.extend({
         self.set('controllers.application.currentUsername', result.user.userName);
         self.set('controllers.application.currentName', result.user.name);
         self.set('controllers.application.currentRole', result.user.role);
+        localStorage.setItem('authSuccessful', true);
+        localStorage.setItem('currentUsername', result.user.userName);
+        localStorage.setItem('currentRole', result.user.role);
 
         self.transitionToRoute('appointments');
       },
