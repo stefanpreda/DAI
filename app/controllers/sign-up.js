@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
         alert("Passwords do not match!");
         return;
       }
-      
+
       const url = this.get('options').url;
       delete this.get('options').url; 
 
@@ -45,19 +45,25 @@ export default Ember.Controller.extend({
         name: this.get('name')
       });
 
-      this.set('name', null);
-      this.set('selectedRole', "patient");
-      this.set('username', null);
-      this.set('password', null);
-      this.set('rePassword', null);
-
       var self = this;
       this.get('ajax').request(url, options).then(function(){
         alert("Sign-up successful");
+
+        self.set('name', null);
+        self.set('selectedRole', "patient");
+        self.set('username', null);
+        self.set('password', null);
+        self.set('rePassword', null);
+
         self.transitionToRoute('sign-in');
       },
       function(reason){
         alert("Sign-up failed: " + reason.errors[0].detail.message);
+        self.set('name', null);
+        self.set('selectedRole', "patient");
+        self.set('username', null);
+        self.set('password', null);
+        self.set('rePassword', null);
       });
     },
 

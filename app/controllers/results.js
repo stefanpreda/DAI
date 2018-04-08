@@ -37,16 +37,20 @@ export default Ember.Controller.extend({
           title: this.get('title'),
           description: this.get('description')
         });
-
-        this.set('title', null);
-        this.set('description', null);
-        this.set('selectedPatient', this.get('patients')[0]);
+        
+        let self = this;
 
         this.get('ajax').request(url, options).then(function(){
           alert("Saved successfully");
+          self.set('title', null);
+          self.set('description', null);
+          self.set('selectedPatient', this.get('patients')[0]);
         },
         function(reason){
           alert("Sign-up failed: " + reason.errors[0].detail.message);
+          self.set('title', null);
+          self.set('description', null);
+          self.set('selectedPatient', this.get('patients')[0]);
         });
   
 

@@ -28,6 +28,9 @@ export default Ember.Route.extend({
             var appointmentsEntry = {};
             appointmentsEntry.title = element.title;
             appointmentsEntry.content = element.description;
+            appointmentsEntry.doctor = element.doctor;
+            appointmentsEntry.date = element.date;
+            appointmentsEntry.time = element.time;
             
             appointments.push(appointmentsEntry);
         });

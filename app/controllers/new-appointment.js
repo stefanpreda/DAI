@@ -40,21 +40,26 @@ export default Ember.Controller.extend({
             date: this.get('date'),
             time: this.get('time')
           });
-    
-          this.set('name', null);
-          this.set('title', null);
-          this.set('description', null);
-          this.set('date', null);
-          this.set('time', null);
-          this.set('selectedDoctor', this.get('doctors')[0]);
 
           var self = this;
           this.get('ajax').request(url, options).then(function(){
             alert("Submitted successfully");
+            self.set('name', null);
+            self.set('title', null);
+            self.set('description', null);
+            self.set('date', null);
+            self.set('time', null);
+            self.set('selectedDoctor', this.get('doctors')[0]);
             self.transitionToRoute('appointments');
           },
           function(reason){
             alert("Submit failed: " + reason.errors[0].detail.message);
+            self.set('name', null);
+            self.set('title', null);
+            self.set('description', null);
+            self.set('date', null);
+            self.set('time', null);
+            self.set('selectedDoctor', this.get('doctors')[0]);
           });
 
     },

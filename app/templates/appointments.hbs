@@ -28,7 +28,13 @@
         {{/paper-toolbar}}
         {{#paper-card-content}}
           <p>
-            {{item.content}}
+            {{#if addButtonNeeded}}
+              {{item.content}}
+            {{else}}
+              Patient: {{item.patient}} <br>
+              Date: {{item.date}} {{item.time}} <br>
+              {{item.content}}
+            {{/if}}
           </p>
         {{/paper-card-content}}
       {{/paper-card}}
